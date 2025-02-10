@@ -8,7 +8,7 @@ VAR1 DB  3 , 0 ,3 DUP ('$')
 LIN  DB  0AH,0AH, 0DH, 24H
 
 MSG1 DB 'Digite a temperatura em Celcius: ', 00h, '$'
-MSG2 DB 'A temperatura em Fahrenheits',00h, 82h , ':' , 00h, '$'
+MSG2 DB 'A temperatura em Fahrenheits:' , 00h, '$'
 
 START:
 
@@ -74,7 +74,7 @@ DIV BL
 MOV CH, AH
 XOR AH, AH
 
-PART_DIGITS2:
+PART_DIGITS_2:
 
 MOV BL, 10
 DIV BL
@@ -92,7 +92,6 @@ RET
 
 PRINT_RESULT:
 
-
 ADD CH, 30H
 ADD CL, 30H
 ADD BH, 30H
@@ -106,7 +105,6 @@ MOV DL,BH
 MOV AH, 02H
 INT 21H 
 
-
 MOV DL, CH
 MOV AH, 02H
 INT 21H
@@ -119,6 +117,5 @@ MOV DX, OFFSET LIN
 MOV AH, 09H
 INT 21H
 RET  
-
 
 END

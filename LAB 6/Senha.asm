@@ -74,7 +74,6 @@
 
     ; Função para guardar o endereço da senha digitada no BX 
     GET_PASSWORD:
-    
     XOR CX, CX    ; Zera o conteúdo de CX
     MOV BX, OFFSET [Pass+2] ; Salvo o endereço do Pass em BX
     
@@ -119,16 +118,16 @@
     ; A quantidade que CX incrementou foi a quantidade de vezes que algum caractere foi incrementado 
     
     CALL Linha
-    MOV dx, offset [Pass+2] ; Entro no endereço Pass para printar as senhas digitadas
+    MOV SI, offset [Pass+2] ; Entro no endereço Pass para printar as senhas digitadas
     CALL Print_Senha  
     RET
 
 ; Função para imprimir as tentativas de senha após os inputs        
     Print_Senha:
-    MOV al, [si] ; Passo o conteúdo do endereço SI para DL
+    MOV DL, [SI] ; Passo o conteúdo do endereço SI para DL
     MOV ah, 02h 
     int 21h      ; Printo a letra no serial
-    inc si       ; Incremento o deslocamento SI
+    inc SI       ; Incremento o deslocamento SI
     Loop Print_Senha ; O valor salvo em CX (numero de caracteres digitados) controla o LOOP
     ret
 

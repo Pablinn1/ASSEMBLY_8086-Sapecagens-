@@ -1,0 +1,58 @@
+
+#start=stepper_motor.exe#
+
+ORG 100h
+
+JMP START
+
+
+VAR1 DB 5,0,5 DUP ('$') 
+MSG1 DB 'Digite o numeros de controle do motor de passo:',00h,'$'
+
+
+START:
+
+MOV DX, OFFSET MSG1
+
+MOV AH, 09H
+
+INT 21H
+
+MOV DX, OFFSET VAR1
+
+MOV AH, 0AH
+
+INT 21H
+
+RODA_MUNDO:
+
+MOV BX, OFFSET VAR1
+
+MOV SI, 00H
+    
+RODA_GIGANTE:
+
+WAIT: 
+
+IN AL, 7
+TEST AL, 10000000b
+
+JZ WAIT
+
+RODA_MOINHO:
+
+MOV AL, [BX+2][SI]
+
+OUT 7, AL
+
+INC SI
+
+CMP SI, 4
+
+JB RODA_GIGANTE
+
+JMP RODA_MUNDO
+
+END         
+
+         

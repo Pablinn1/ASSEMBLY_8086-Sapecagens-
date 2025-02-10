@@ -1,0 +1,44 @@
+
+#start=stepper_motor.exe#
+
+ORG 100h
+
+JMP START
+
+HALF_STEP DB 0000_0001b
+          DB 0000_0011b
+          DB 0000_0100b
+          DB 0000_0110b
+
+START:
+
+MOV BX, OFFSET HALF_STEP
+
+MOV SI, 00H
+    
+RUN:
+
+WAIT: 
+
+IN AL, 7
+TEST AL, 10000000b
+
+JZ WAIT
+
+RODA_VIVA:
+
+MOV AL, [BX][SI]
+
+OUT 7, AL
+
+INC SI
+
+CMP SI, 4
+
+JB RUN
+
+JMP START
+
+END         
+
+         
