@@ -1,40 +1,40 @@
-; Soma de números (0 a 99) - Utilizando números de 0 a 50
+; Soma de nÃºmeros (0 a 99) - Utilizando nÃºmeros de 0 a 50
 
 org 100h
 
-; Início do programa
+; InÃ­cio do programa
 oper_1:
 
-    ; Lê o primeiro número (primeiro dígito)
+    ; LÃª o primeiro nÃºmero (primeiro dÃ­gito)
     mov ah, 0
     int 16h                 ; Aguarda entrada do teclado
 
     mov ah, 0Eh
     int 10h                 ; Exibe o caractere digitado
 
-    sub al, 30h             ; Converte o ASCII para número
-    mov cl, al              ; Salva o número em CL
+    sub al, 30h             ; Converte o ASCII para nÃºmero
+    mov cl, al              ; Salva o nÃºmero em CL
 
     mov ah, 0
     int 16h                 ; Aguarda nova entrada do teclado
 
-    cmp al, 2bh             ; Verifica se é o caractere '+'
-    je oper_2               ; Se for '+', pula para a próxima parte
+    cmp al, 2bh             ; Verifica se Ã© o caractere '+'
+    je oper_2               ; Se for '+', pula para a prÃ³xima parte
 
 second_digit:
 
     mov ah, 0Eh
     int 10h                 ; Exibe o caractere digitado
 
-    sub al, 30h             ; Converte o ASCII para número
-    mov dl, al              ; Salva o número em DL
+    sub al, 30h             ; Converte o ASCII para nÃºmero
+    mov dl, al              ; Salva o nÃºmero em DL
 
-    ; Calcula o número completo no primeiro operando
+    ; Calcula o nÃºmero completo no primeiro operando
     mov al, cl
     mov bl, 0ah
-    mul bl                  ; Multiplica o primeiro dígito por 10
+    mul bl                  ; Multiplica o primeiro dÃ­gito por 10
     mov cl, al              ; Salva o resultado em CL
-    add cl, dl              ; Soma o segundo dígito ao número
+    add cl, dl              ; Soma o segundo dÃ­gito ao nÃºmero
 
 oper_2:
 
@@ -43,20 +43,20 @@ oper_2:
     mov dl, '+'
     int 21h
 
-    ; Lê o segundo número (primeiro dígito)
+    ; LÃª o segundo nÃºmero (primeiro dÃ­gito)
     mov ah, 0
     int 16h
 
     mov ah, 0Eh
     int 10h                 ; Exibe o caractere digitado
 
-    sub al, 30h             ; Converte o ASCII para número
-    mov dl, al              ; Salva o número em DL
+    sub al, 30h             ; Converte o ASCII para nÃºmero
+    mov dl, al              ; Salva o nÃºmero em DL
 
     mov ah, 0
     int 16h                 ; Aguarda nova entrada do teclado
 
-    cmp al, 0dh             ; Verifica se é o caractere 'Enter'
+    cmp al, 0dh             ; Verifica se Ã© o caractere 'Enter'
     je Soma                 ; Se for 'Enter', pula para soma final
 
 second_digit_2:
@@ -64,24 +64,24 @@ second_digit_2:
     mov ah, 0Eh
     int 10h                 ; Exibe o caractere digitado
 
-    sub al, 30h             ; Converte o ASCII para número
-    mov dh, al              ; Salva o número em DH
+    sub al, 30h             ; Converte o ASCII para nÃºmero
+    mov dh, al              ; Salva o nÃºmero em DH
 
     mov al, dl
     mov bl, 0ah
-    mul bl                  ; Multiplica o primeiro dígito por 10
+    mul bl                  ; Multiplica o primeiro dÃ­gito por 10
     mov bl, al              ; Salva o resultado em BL
 
-    add bl, dh              ; Soma o segundo dígito ao número
-    jmp Soma2               ; Pula para a soma secundária
+    add bl, dh              ; Soma o segundo dÃ­gito ao nÃºmero
+    jmp Soma2               ; Pula para a soma secundÃ¡ria
 
 Soma:
 
-    ; Soma os dois números
+    ; Soma os dois nÃºmeros
     add cl, dl
     mov al, cl
 
-    ; Divide o resultado por 10 para exibir os dígitos separadamente
+    ; Divide o resultado por 10 para exibir os dÃ­gitos separadamente
     mov ah, 0               ; Zera o registrador AH
     mov bl, 10              ; Divisor
     div bl                  ; Divide AL por 10
@@ -113,11 +113,11 @@ Soma:
 
 Soma2:
 
-    ; Soma os dois números (caso haja um segundo dígito no segundo número)
+    ; Soma os dois nÃºmeros (caso haja um segundo dÃ­gito no segundo nÃºmero)
     add cl, bl
     mov al, cl
 
-    ; Divide o resultado por 10 para exibir os dígitos separadamente
+    ; Divide o resultado por 10 para exibir os dÃ­gitos separadamente
     mov ah, 0
     mov bl, 10
     div bl
